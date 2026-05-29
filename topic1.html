@@ -2,7 +2,8 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Loving English Garden - Topic 1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> 
+  <title>Loving English Garden - Topic 1</title>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
   <style>
     :root{
@@ -14,25 +15,36 @@
     }
     *{margin:0;padding:0;box-sizing:border-box}
     
-    /* BẢO MẬT: CHỐNG BÔI ĐEN VĂN BẢN (Ngoại trừ ô nhập liệu) */
+    /* BẢO MẬT & TỐI ƯU FONT CHO APP/WEB */
     body {
-      font-family:'Nunito',sans-serif;background:var(--beige);color:var(--text);min-height:600px;
+      font-family: 'Nunito', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--beige);
+      color: var(--text);
+      min-height: 600px;
+      -webkit-font-smoothing: antialiased; /* Khử răng cưa cho iOS/macOS */
+      -moz-osx-font-smoothing: grayscale;
+      -webkit-text-size-adjust: 100%; /* Tránh lỗi tự zoom chữ trên mobile */
       -webkit-user-select: none; /* Safari */
-      -ms-user-select: none; /* IE 10 and IE 11 */
+      -ms-user-select: none; /* IE 10+ */
       user-select: none; /* Standard syntax */
+      -webkit-tap-highlight-color: transparent; /* Bỏ viền xanh khi tap trên mobile */
     }
     input {
       -webkit-user-select: text;
       user-select: text;
     }
     
-    .nav{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:rgba(245,240,232,0.97);border-bottom:1px solid var(--warm);position:sticky;top:0;z-index:99}
-    .logo{font-family:'Lora',serif;font-size:17px;color:var(--wood);font-weight:600;text-decoration:none}
+    .font-serif {
+      font-family: 'Lora', Georgia, "Times New Roman", serif;
+    }
+    
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:rgba(245,240,232,0.97);border-bottom:1px solid var(--warm);position:sticky;top:0;z-index:99;backdrop-filter:blur(8px);}
+    .logo{font-size:17px;color:var(--wood);font-weight:600;text-decoration:none}
     .logo span{color:var(--green)}
     .nav-right{display:flex;align-items:center;gap:10px}
     .drops-pill{display:flex;align-items:center;gap:5px;background:var(--drop-light);border:1px solid var(--drop);border-radius:20px;padding:3px 10px;font-size:12px;font-weight:700;color:var(--drop)}
     .day-pill{background:var(--green-pale);color:var(--green);font-size:12px;font-weight:700;padding:3px 10px;border-radius:20px;border:1px solid var(--green-light)}
-    .back-btn{background:transparent;border:1px solid var(--warm);border-radius:10px;padding:5px 12px;font-size:12px;font-weight:600;color:var(--text-mid);cursor:pointer;font-family:'Nunito',sans-serif;text-decoration:none}
+    .back-btn{background:transparent;border:1px solid var(--warm);border-radius:10px;padding:5px 12px;font-size:12px;font-weight:600;color:var(--text-mid);cursor:pointer;text-decoration:none}
     .back-btn:hover{background:var(--beige2)}
 
     /* FLOW VIEW STYLES */
@@ -44,29 +56,29 @@
     .prog-fill{height:100%;background:var(--green);border-radius:6px;transition:width .5s ease}
     .f-card{background:#fff;border-radius:20px;border:1px solid var(--beige2);padding:24px;margin-bottom:16px}
     .f-tag{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--text-soft);margin-bottom:6px}
-    .f-title{font-family:'Lora',serif;font-size:20px;font-weight:600;color:var(--text);margin-bottom:4px}
+    .f-title{font-size:20px;font-weight:600;color:var(--text);margin-bottom:4px}
     .f-sub{font-size:13px;color:var(--text-mid);line-height:1.6;margin-bottom:0}
-    .phrase-box{background:var(--yellow-pale);border:1px solid var(--yellow);border-radius:14px;padding:14px 20px;font-family:'Lora',serif;font-size:17px;font-weight:600;color:var(--text);margin-bottom:8px;text-align:center}
+    .phrase-box{background:var(--yellow-pale);border:1px solid var(--yellow);border-radius:14px;padding:14px 20px;font-size:17px;font-weight:600;color:var(--text);margin-bottom:8px;text-align:center}
 
     /* BUTTONS */
     .btn-row{display:flex;gap:8px;margin-top:16px}
-    .btn-sec{flex:1;background:transparent;border:1.5px solid var(--warm);border-radius:14px;padding:11px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;color:var(--text-mid);transition:all .2s;text-align:center}
+    .btn-sec{flex:1;background:transparent;border:1.5px solid var(--warm);border-radius:14px;padding:11px;font-size:13px;font-weight:700;cursor:pointer;color:var(--text-mid);transition:all .2s;text-align:center}
     .btn-sec:hover{background:var(--beige2)}
-    .btn-pri{flex:2;background:var(--green);color:#fff;border:none;border-radius:14px;padding:11px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;transition:all .2s;text-align:center}
+    .btn-pri{flex:2;background:var(--green);color:#fff;border:none;border-radius:14px;padding:11px;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;text-align:center}
     .btn-pri:hover{background:var(--green-light)}
-    .btn-wood{background:var(--wood);color:#fff;border:none;border-radius:14px;padding:12px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;width:100%;display:flex;align-items:center;justify-content:center;gap:7px;margin-top:14px;transition:all .2s}
+    .btn-wood{background:var(--wood);color:#fff;border:none;border-radius:14px;padding:12px;font-size:13px;font-weight:700;cursor:pointer;width:100%;display:flex;align-items:center;justify-content:center;gap:7px;margin-top:14px;transition:all .2s}
     .btn-wood:hover{background:var(--wood-light)}
 
     /* MODAL */
-    .ts-btn{display:inline-flex;align-items:center;gap:6px;background:transparent;border:1px solid var(--drop);color:var(--drop);border-radius:10px;padding:6px 12px;font-size:12px;font-weight:700;cursor:pointer;margin-bottom:16px;font-family:'Nunito',sans-serif;}
+    .ts-btn{display:inline-flex;align-items:center;gap:6px;background:transparent;border:1px solid var(--drop);color:var(--drop);border-radius:10px;padding:6px 12px;font-size:12px;font-weight:700;cursor:pointer;margin-bottom:16px;}
     .ts-btn:hover{background:var(--drop-light)}
-    .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:999;display:none;align-items:center;justify-content:center;padding:20px}
+    .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:999;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px);}
     .modal-overlay.show{display:flex}
     .modal-content{background:#fff;width:100%;max-width:400px;border-radius:20px;padding:24px;max-height:85vh;overflow-y:auto;position:relative}
     .modal-close{position:absolute;top:16px;right:18px;font-size:24px;color:var(--text-soft);cursor:pointer;line-height:1}
     .ts-item{padding:12px 0;border-bottom:1px solid var(--beige2)}
     .ts-item:last-child{border-bottom:none}
-    .ts-en{font-family:'Lora',serif;font-size:16px;font-weight:600;color:var(--wood);margin-bottom:2px}
+    .ts-en{font-size:16px;font-weight:600;color:var(--wood);margin-bottom:2px}
     .ts-vn{font-size:13px;color:var(--text-soft)}
 
     /* FLASHCARD */
@@ -76,13 +88,13 @@
     .fc-face{position:absolute;width:100%;min-height:180px;backface-visibility:hidden;border-radius:18px;padding:24px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
     .fc-front{background:var(--green);color:#fff}
     .fc-back{background:var(--wood);color:#fff;transform:rotateY(180deg)}
-    .fc-en{font-family:'Lora',serif;font-size:22px;font-weight:600;margin-bottom:6px}
+    .fc-en{font-size:22px;font-weight:600;margin-bottom:6px}
     .fc-hint{font-size:11px;opacity:.75;letter-spacing:.05em;text-transform:uppercase}
-    .fc-vn{font-family:'Lora',serif;font-size:16px;font-weight:600;margin-bottom:10px}
+    .fc-vn{font-size:16px;font-weight:600;margin-bottom:10px}
     .fc-phon{background:rgba(255,255,255,.15);border-radius:8px;padding:8px 14px;font-size:12px;margin-bottom:10px;cursor:pointer;}
     .fc-phon span{padding:4px 8px;border-radius:6px;transition:background 0.2s;display:inline-block;margin:0 2px;}
     .fc-phon span:hover{background:rgba(255,255,255,.2)}
-    .fc-note{font-size:11px;opacity:.82;line-height:1.5;max-width:260px}
+    .fc-note{font-size:11px;opacity:.82;line-height:1.5;max-width:260px;font-family: 'Nunito', sans-serif;}
     .flip-tip{text-align:center;font-size:11px;color:var(--text-soft);margin-top:6px}
     .tpr-box{background:var(--yellow-pale);border:1px solid var(--yellow);border-radius:14px;padding:16px;margin-top:14px;display:flex;gap:14px;align-items:flex-start}
     .tpr-ico{font-size:28px}
@@ -107,13 +119,13 @@
 
     /* MINIGAMES */
     .mg-tabs{display:flex;gap:7px;margin-bottom:16px}
-    .mg-tab{flex:1;padding:8px;border:1px solid var(--warm);border-radius:10px;background:#fff;font-size:12px;font-weight:700;color:var(--text-soft);cursor:pointer;transition:all .2s;text-align:center;font-family:'Nunito',sans-serif}
+    .mg-tab{flex:1;padding:8px;border:1px solid var(--warm);border-radius:10px;background:#fff;font-size:12px;font-weight:700;color:var(--text-soft);cursor:pointer;transition:all .2s;text-align:center;}
     .mg-tab.on{background:var(--green);color:#fff;border-color:var(--green)}
-    .blank-input{border:none;border-bottom:2px solid var(--green);background:transparent;font-size:15px;font-family:'Lora',serif;color:var(--text);width:110px;outline:none;padding:2px 4px;text-align:center}
+    .blank-input{border:none;border-bottom:2px solid var(--green);background:transparent;font-size:15px;color:var(--text);width:110px;outline:none;padding:2px 4px;text-align:center}
     .blank-input.ok{border-color:var(--green);color:var(--green)}
     .blank-input.err{border-color:#E24B4A;color:#E24B4A;animation:shk .3s}
     @keyframes shk{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
-    .chk-btn{background:var(--green);color:#fff;border:none;border-radius:10px;padding:9px 20px;font-size:13px;font-weight:700;cursor:pointer;margin-top:10px;font-family:'Nunito',sans-serif;transition:background .2s}
+    .chk-btn{background:var(--green);color:#fff;border:none;border-radius:10px;padding:9px 20px;font-size:13px;font-weight:700;cursor:pointer;margin-top:10px;transition:background .2s}
     .chk-btn:hover{background:var(--green-light)}
     .chk-res{font-size:13px;margin-top:8px;font-weight:700}
     .match-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
@@ -129,7 +141,7 @@
     .journal-c{text-align:center;padding:12px 0}
     .j-ico{font-size:40px;margin-bottom:10px}
     .j-prompt{font-size:14px;color:var(--text-mid);margin-bottom:20px;line-height:1.7;max-width:360px;margin-left:auto;margin-right:auto}
-    .rec-btn{background:var(--sunrise);color:#fff;border:none;border-radius:14px;padding:12px 26px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;display:inline-flex;align-items:center;gap:8px;transition:all .2s;margin-bottom:14px}
+    .rec-btn{background:var(--sunrise);color:#fff;border:none;border-radius:14px;padding:12px 26px;font-size:14px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:all .2s;margin-bottom:14px}
     .rec-btn.recording{background:#E24B4A;animation:pmic 1.1s infinite}
     .j-saved{display:none;padding:14px;background:var(--yellow-pale);border:1px solid var(--yellow);border-radius:12px}
     .j-saved.show{display:block}
@@ -137,13 +149,13 @@
     /* PLANT / COMPLETE */
     .complete-c{text-align:center;padding:28px 20px}
     .compl-ico{font-size:50px;margin-bottom:12px}
-    .compl-title{font-family:'Lora',serif;font-size:22px;color:var(--wood);margin-bottom:6px}
+    .compl-title{font-size:22px;color:var(--wood);margin-bottom:6px}
     .compl-sub{font-size:13px;color:var(--text-mid);margin-bottom:20px;line-height:1.6}
     .drops-earned{display:inline-flex;align-items:center;gap:7px;background:#fff;border:1px solid var(--drop);border-radius:20px;padding:8px 18px;font-size:14px;font-weight:700;color:var(--drop);margin-bottom:18px}
     .plant-svg-wrap{margin:0 auto 12px;width:130px;height:130px}
     .plant-stage-lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-soft);margin-bottom:2px}
     .plant-name{font-size:15px;font-weight:700;color:var(--wood);margin-bottom:18px}
-    .water-btn{background:var(--drop);color:#fff;border:none;border-radius:14px;padding:12px 28px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;display:inline-flex;align-items:center;gap:8px;transition:all .3s;box-shadow:0 4px 14px rgba(74,144,217,.28)}
+    .water-btn{background:var(--drop);color:#fff;border:none;border-radius:14px;padding:12px 28px;font-size:14px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:all .3s;box-shadow:0 4px 14px rgba(74,144,217,.28)}
     .water-btn:disabled{opacity:.5;cursor:default;transform:none}
 
     /* WATER ANIM */
@@ -163,7 +175,7 @@
 
 <div style="position:relative;min-height:600px">
   <div class="nav">
-    <a href="index.html" class="logo">🌱 Loving English <span>Garden</span></a>
+    <a href="index.html" class="logo font-serif">🌱 Loving English <span>Garden</span></a>
     <div class="nav-right">
       <a href="index.html" class="back-btn" id="backBtn">← Dashboard</a>
       <div class="day-pill">Ngày <span id="navDay">1</span></div>
@@ -180,12 +192,12 @@
     <div id="s1">
       <div class="f-card">
         <div class="f-tag">Bước 1 · Lắng nghe / Listen</div>
-        <div class="f-title">Nghe & Cảm nhận</div>
+        <div class="f-title font-serif">Nghe & Cảm nhận</div>
         <div class="f-sub">Bấm để lắng nghe câu tiếng Anh hôm nay nhé!</div>
         
         <div style="text-align:center; padding:30px 0">
-          <div class="phrase-box" id="s1Phrase" style="font-size:20px; padding:20px 14px; margin-bottom:20px">—</div>
-          <div style="display:flex; gap:10px; justify-content:center; margin-bottom:24px">
+          <div class="phrase-box font-serif" id="s1Phrase" style="font-size:20px; padding:20px 14px; margin-bottom:20px">—</div>
+          <div style="display:flex; gap:10px; justify-content:center; margin-bottom:24px; flex-wrap: wrap;">
             <button class="btn-pri" style="flex:initial; padding:12px 20px" onclick="playS1(1.0)">🔊 Đọc chuẩn (1.0x)</button>
             <button class="btn-sec" style="flex:initial; padding:12px 20px; border-color:var(--drop); color:var(--drop)" onclick="playS1(0.7)">🐢 Đọc chậm (0.7x)</button>
           </div>
@@ -197,15 +209,15 @@
     <div id="s2" style="display:none">
       <div class="f-card">
         <div class="f-tag">Bước 2 · Flashcard</div>
-        <div class="f-title" id="s2Title">Câu của ngày hôm nay</div>
+        <div class="f-title font-serif" id="s2Title">Câu của ngày hôm nay</div>
         <div class="f-sub">Bấm vào thẻ để xem tiếng Việt và phát âm</div>
         <div class="fc-scene"><div class="fc-inner" id="theFC" onclick="flipFC()">
           <div class="fc-face fc-front">
             <div class="fc-hint">Tiếng Anh · Bấm để lật</div>
-            <div class="fc-en" id="fcEn">—</div>
+            <div class="fc-en font-serif" id="fcEn">—</div>
           </div>
           <div class="fc-face fc-back">
-            <div class="fc-vn" id="fcVn">—</div>
+            <div class="fc-vn font-serif" id="fcVn">—</div>
             <div class="fc-phon">
               <span onclick="playFlashcardAudio(event, 1.0)">🔊 1.0x (Chuẩn)</span> | 
               <span onclick="playFlashcardAudio(event, 0.7)">🐢 0.7x (Chậm)</span>
@@ -231,10 +243,10 @@
     <div id="s3" style="display:none">
       <div class="f-card">
         <div class="f-tag">Bước 3 · Luyện phát âm</div>
-        <div class="f-title">🌿 Thì thầm cùng mầm cây</div>
+        <div class="f-title font-serif">🌿 Thì thầm cùng mầm cây</div>
         <div class="f-sub" style="margin-bottom:18px">Nói rõ ràng câu tiếng Anh vào micro nhé!</div>
         <div class="mic-wrap">
-          <div class="phrase-box" id="s3Phrase" style="margin-bottom:18px;font-size:15px">—</div>
+          <div class="phrase-box font-serif" id="s3Phrase" style="margin-bottom:18px;font-size:15px">—</div>
           <button class="mic-btn" id="micBtn" onclick="doMic()">
             <svg class="mic-svg" viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="11" rx="3"/><path d="M5 10a7 7 0 0014 0"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="8" y1="22" x2="16" y2="22"/></svg>
           </button>
@@ -253,8 +265,8 @@
         <div class="f-tag">Bước 4 · Luyện tập</div>
 
         <div id="journalUI" style="display:none">
-          <div class="milestone-badge">🎉 Milestone!</div>
-          <div class="f-title">Lưu bút âm thanh gia đình</div>
+          <div class="milestone-badge" style="font-size:12px;font-weight:700;color:var(--sunrise);text-transform:uppercase;margin-bottom:4px">🎉 Milestone!</div>
+          <div class="f-title font-serif">Lưu bút âm thanh gia đình</div>
           <div class="f-sub" style="margin-bottom:16px">Ghi âm cả nhà đóng vai cùng nhau nhé!</div>
           <div class="journal-c">
             <div class="j-ico">🎙️</div>
@@ -269,14 +281,14 @@
         </div>
 
         <div id="gamesUI">
-          <div class="f-title">Minigames</div>
+          <div class="f-title font-serif">Minigames</div>
           <div class="mg-tabs">
             <div class="mg-tab on" id="gt1" onclick="swGame(1)">✍️ Điền vào chỗ trống</div>
             <div class="mg-tab" id="gt2" onclick="swGame(2)">🔗 Ghép đôi</div>
           </div>
           <div id="g1">
             <div style="font-size:14px;color:var(--text-mid);margin-bottom:12px">Điền từ còn thiếu:</div>
-            <div id="typingLine" style="font-family:'Lora',serif;font-size:16px;color:var(--text);line-height:2"></div>
+            <div id="typingLine" class="font-serif" style="font-size:16px;color:var(--text);line-height:2"></div>
             <div style="font-size:12px;color:var(--text-soft);margin-bottom:8px">Gợi ý: nghĩa tiếng Việt là "<span id="blankHint">?</span>" 💡</div>
             <button class="chk-btn" onclick="checkTyping()">Kiểm tra ✓</button>
             <div class="chk-res" id="typRes"></div>
@@ -296,7 +308,7 @@
       <div class="f-card" style="background:linear-gradient(135deg,var(--green-pale),var(--yellow-pale));border-color:var(--green-light)">
         <div class="complete-c">
           <div class="compl-ico" id="complIco">🌱</div>
-          <div class="compl-title">Vườn hôm nay đã lớn thêm!</div>
+          <div class="compl-title font-serif">Vườn hôm nay đã lớn thêm!</div>
           <div class="compl-sub">Bạn đã hoàn thành ngày <b id="doneDayN">1</b>. Tưới nước cho cây nhé! 💧</div>
           <div class="drops-earned">💧 +5 giọt nước hôm nay!</div>
           <div class="plant-stage-lbl" id="pStgLbl">Mầm cây</div>
@@ -336,7 +348,7 @@
   <div class="modal-overlay" id="tsModal">
     <div class="modal-content">
       <div class="modal-close" onclick="closeModal()">✖</div>
-      <h3 style="font-family:'Lora',serif; color:var(--wood); margin-bottom:16px;">Topic Sentences</h3>
+      <h3 class="font-serif" style="color:var(--wood); margin-bottom:16px;">Topic Sentences</h3>
       <div id="tsList"></div>
     </div>
   </div>
@@ -352,16 +364,16 @@
 
 <script>
 // --- CHỨC NĂNG BẢO MẬT ---
-document.addEventListener('contextmenu', event => event.preventDefault()); // Chống chuột phải
+document.addEventListener('contextmenu', event => event.preventDefault()); 
 document.addEventListener('keydown', function(e) {
   if ((e.ctrlKey || e.metaKey) && (e.key === 'c' || e.key === 'C')) {
-    e.preventDefault(); // Chống phím tắt copy
+    e.preventDefault(); 
   }
 });
-document.addEventListener('copy', event => event.preventDefault()); // Chống hành động copy
+document.addEventListener('copy', event => event.preventDefault());
 
 // --- XÁC ĐỊNH FILE TOPIC ---
-const activeTopicId = 1; // <== Cố định ID của file Topic 1
+const activeTopicId = 1; 
 const currentTopicStart = (activeTopicId - 1) * 10 + 1;
 const currentTopicEnd = activeTopicId * 10;
 
@@ -437,7 +449,7 @@ function openModal() {
     topicData.forEach(item => {
       const div = document.createElement('div');
       div.className = 'ts-item';
-      div.innerHTML = `<div class="ts-en">Day ${item.day}: ${item.en}</div><div class="ts-vn">${item.vn}</div>`;
+      div.innerHTML = `<div class="ts-en font-serif">Day ${item.day}: ${item.en}</div><div class="ts-vn">${item.vn}</div>`;
       tsList.appendChild(div);
     });
   }
@@ -448,7 +460,7 @@ function closeModal() { document.getElementById('tsModal').classList.remove('sho
 // Luồng học
 function initFlow(){
   const d = CURRICULUM.find(x => x.day === curDay) || CURRICULUM[0];
-  const isMS = curDay % 10 === 0 || curDay % 5 === 0; // Kỷ niệm mỗi 5/10 ngày
+  const isMS = curDay % 10 === 0 || curDay % 5 === 0;
 
   fcFlipped=false; tprDone=false; micDone=false; watered=false;
   selEn=null; selVn=null; matched=0; isRecording=false;
@@ -546,7 +558,7 @@ function doMic(){
 
 function buildTyping(d){
   const parts = d.en.split(d.blank);
-  document.getElementById('typingLine').innerHTML = parts[0]+`<input class="blank-input" id="blankInp" placeholder="?" autocomplete="off">`+(parts[1]||'');
+  document.getElementById('typingLine').innerHTML = parts[0]+`<input class="blank-input font-serif" id="blankInp" placeholder="?" autocomplete="off">`+(parts[1]||'');
   document.getElementById('blankHint').textContent = d.hint;
 }
 function checkTyping(){
@@ -555,10 +567,10 @@ function checkTyping(){
   const res=document.getElementById('typRes');
   if(!inp) return;
   if(inp.value.trim().toLowerCase()===d.blank.toLowerCase()){
-    inp.className='blank-input ok'; res.textContent='✅ Đúng rồi! +2 💧'; res.style.color='var(--green)'; addDrops(2);
+    inp.className='blank-input font-serif ok'; res.textContent='✅ Đúng rồi! +2 💧'; res.style.color='var(--green)'; addDrops(2);
   } else {
-    inp.className='blank-input err'; res.textContent=`❌ Thử lại nhé! Gợi ý: "${d.hint}"`; res.style.color='#E24B4A';
-    setTimeout(()=>inp.className='blank-input',600);
+    inp.className='blank-input font-serif err'; res.textContent=`❌ Thử lại nhé! Gợi ý: "${d.hint}"`; res.style.color='#E24B4A';
+    setTimeout(()=>inp.className='blank-input font-serif',600);
   }
 }
 
@@ -640,7 +652,7 @@ function doWater(){
     clearInterval(iv); ov.classList.remove('show');
     document.getElementById('waterBtn').textContent='✅ Đã tưới hôm nay!';
     completedDays.add(curDay);
-    localStorage.setItem('gardenDays', JSON.stringify([...completedDays])); // Lưu vào localStorage
+    localStorage.setItem('gardenDays', JSON.stringify([...completedDays])); 
     addDrops(5); celebrate(); updatePlant();
   },2800);
 }
@@ -648,7 +660,7 @@ function doWater(){
 function addDrops(n){
   drops+=n;
   document.getElementById('navDrops').textContent=drops;
-  localStorage.setItem('gardenDrops', drops); // Lưu vào localStorage
+  localStorage.setItem('gardenDrops', drops); 
 }
 
 function celebrate(){
@@ -667,7 +679,7 @@ function celebrate(){
 function prevDay(){if(curDay>currentTopicStart){curDay--;initFlow();}}
 function nextDay(){if(curDay<currentTopicEnd){curDay++;initFlow();}}
 
-initFlow(); // Bắt đầu màn học
+initFlow(); 
 </script>
 </body>
 </html>
