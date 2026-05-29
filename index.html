@@ -2,6 +2,7 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Loving English Garden - Dashboard</title>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
   <style>
@@ -13,7 +14,7 @@
     
     /* BẢO MẬT: CHỐNG BÔI ĐEN VĂN BẢN */
     body{
-      font-family:'Nunito',sans-serif;background:var(--beige);color:var(--text);min-height:600px;
+      font-family:'Nunito',sans-serif;background:var(--beige);color:var(--text);min-height:100vh;
       -webkit-user-select: none; /* Safari */
       -ms-user-select: none; /* IE 10 and IE 11 */
       user-select: none; /* Standard syntax */
@@ -30,13 +31,16 @@
     .hero-plant{font-size:52px;margin-bottom:8px}
     .hero-title{font-family:'Lora',serif;font-size:24px;color:var(--wood);font-weight:600;margin-bottom:4px}
     .hero-sub{font-size:13px;color:var(--text-soft)}
-    .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:20px}
+    
+    /* Mặc định hiển thị 2 cột cho điện thoại */
+    .stats-row{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:20px}
     .stat-box{background:#fff;border:1px solid var(--beige2);border-radius:var(--card-r);padding:12px;text-align:center}
     .stat-num{font-size:20px;font-weight:800;color:var(--wood)}
     .stat-lbl{font-size:10px;color:var(--text-soft);text-transform:uppercase;letter-spacing:.05em;margin-top:2px}
     .section-lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text-soft);margin-bottom:12px}
     
-    .topic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:10px}
+    /* Mặc định min 145px cho thẻ để điện thoại nhỏ vẫn hiện 2 cột đẹp */
+    .topic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:10px}
     .t-card{background:#fff;border:1px solid var(--beige2);border-radius:var(--card-r);overflow:hidden;cursor:pointer;transition:all .18s;text-decoration:none;color:inherit;display:block;}
     .t-card:hover{border-color:var(--warm);transform:translateY(-2px)}
     .t-card.t-active{border:2px solid var(--drop)}
@@ -56,17 +60,26 @@
     /* GIAO DIỆN ĐĂNG NHẬP */
     .login-overlay{position:fixed;inset:0;background:var(--beige);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;transition:opacity 0.4s}
     .login-box{background:#fff;padding:34px 24px;border-radius:20px;box-shadow:0 10px 40px rgba(139,111,78,0.15);text-align:center;max-width:340px;width:90%;border:1px solid var(--beige2)}
-    .login-input{width:100%;padding:14px;margin:8px 0;border:1.5px solid var(--beige2);border-radius:12px;font-family:'Nunito',sans-serif;font-size:14px;outline:none;transition:border 0.2s; -webkit-user-select: text; user-select: text;}
+    .login-input{width:100%;padding:14px;margin:8px 0;border:1.5px solid var(--beige2);border-radius:12px;font-family:'Nunito',sans-serif;font-size:16px;outline:none;transition:border 0.2s; -webkit-user-select: text; user-select: text;}
     .login-input:focus{border-color:var(--green)}
     .login-btn{width:100%;background:var(--green);color:#fff;border:none;padding:14px;border-radius:12px;font-weight:700;font-size:15px;cursor:pointer;margin-top:14px;font-family:'Nunito',sans-serif;transition:background 0.2s}
-    .login-btn:hover{background:var(--green-light)}
+    .login-btn:hover{background:var(--green)}
     .error-msg{color:#E24B4A;font-size:13px;font-weight:600;display:none;margin-top:8px;animation:shake 0.3s}
     @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+
+    /* RESPONSIVE LỚN HƠN CHO MÀN HÌNH MÁY TÍNH/TABLET */
+    @media (min-width: 576px) {
+      .stats-row {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      .topic-grid {
+        grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+      }
+    }
   </style>
 </head>
 <body>
 
-<!-- LỚP ĐĂNG NHẬP -->
 <div class="login-overlay" id="loginOverlay">
   <div class="login-box">
     <div style="font-size:48px; margin-bottom:12px">🌱</div>
@@ -81,7 +94,6 @@
   </div>
 </div>
 
-<!-- NỘI DUNG CHÍNH CỦA DASHBOARD -->
 <div class="nav">
   <div class="logo">🌱 Loving English <span>Garden</span></div>
   <div class="nav-right">
@@ -109,16 +121,13 @@
 
 <script>
 // --- CHỨC NĂNG BẢO MẬT ---
-// Chống Click chuột phải
 document.addEventListener('contextmenu', event => event.preventDefault());
 
-// Chống Copy bằng phím tắt (Ctrl+C, Cmd+C)
 document.addEventListener('keydown', function(e) {
   if ((e.ctrlKey || e.metaKey) && (e.key === 'c' || e.key === 'C')) {
     e.preventDefault();
   }
 });
-// Chống hành động copy
 document.addEventListener('copy', event => event.preventDefault());
 
 // --- CHỨC NĂNG ĐĂNG NHẬP ---
@@ -127,12 +136,10 @@ function checkLogin() {
   const p = document.getElementById('password').value.trim();
   const err = document.getElementById('loginError');
   
-  // Kiểm tra tài khoản và mật khẩu
   if (u === 'weloveenglish' && p === 'beagift') {
     sessionStorage.setItem('isLoggedIn', 'true');
     err.style.display = 'none';
     
-    // Hiệu ứng mờ dần khi đăng nhập thành công
     const overlay = document.getElementById('loginOverlay');
     overlay.style.opacity = '0';
     setTimeout(() => { overlay.style.display = 'none'; }, 400);
@@ -141,7 +148,6 @@ function checkLogin() {
   }
 }
 
-// Cho phép nhấn Enter để đăng nhập
 document.getElementById('password').addEventListener('keypress', function (e) {
   if (e.key === 'Enter') checkLogin();
 });
@@ -149,13 +155,11 @@ document.getElementById('username').addEventListener('keypress', function (e) {
   if (e.key === 'Enter') document.getElementById('password').focus();
 });
 
-// Kiểm tra xem đã đăng nhập trước đó chưa (trong cùng 1 phiên lướt web)
 window.onload = function() {
   if(sessionStorage.getItem('isLoggedIn') === 'true') {
     document.getElementById('loginOverlay').style.display = 'none';
   }
 }
-
 
 // --- DATA VÀ HIỂN THỊ DASHBOARD ---
 const TOPICS = [
