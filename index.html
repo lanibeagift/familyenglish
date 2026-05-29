@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Loving English Garden - Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --beige:#F5F0E8;--beige2:#EDE6D6;--warm:#D4C5A9;--wood:#8B6F4E;--green:#5C8A5E;
+      --drop:#4A90D9;--drop-light:#A8D4F5;--text:#3D2B1F;--text-soft:#9B7E6F;--card-r:16px;
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    
+    /* BẢO MẬT: CHỐNG BÔI ĐEN VĂN BẢN */
+    body{
+      font-family:'Nunito',sans-serif;background:var(--beige);color:var(--text);min-height:600px;
+      -webkit-user-select: none; /* Safari */
+      -ms-user-select: none; /* IE 10 and IE 11 */
+      user-select: none; /* Standard syntax */
+    }
+
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:rgba(245,240,232,0.97);border-bottom:1px solid var(--warm);position:sticky;top:0;z-index:99}
+    .logo{font-family:'Lora',serif;font-size:17px;color:var(--wood);font-weight:600;cursor:pointer}
+    .logo span{color:var(--green)}
+    .nav-right{display:flex;align-items:center;gap:10px}
+    .drops-pill{display:flex;align-items:center;gap:5px;background:var(--drop-light);border:1px solid var(--drop);border-radius:20px;padding:3px 10px;font-size:12px;font-weight:700;color:var(--drop)}
+    
+    .home-wrap{padding:20px 18px 60px;max-width:780px;margin:0 auto}
+    .home-hero{text-align:center;padding:28px 0 20px}
+    .hero-plant{font-size:52px;margin-bottom:8px}
+    .hero-title{font-family:'Lora',serif;font-size:24px;color:var(--wood);font-weight:600;margin-bottom:4px}
+    .hero-sub{font-size:13px;color:var(--text-soft)}
+    .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:20px}
+    .stat-box{background:#fff;border:1px solid var(--beige2);border-radius:var(--card-r);padding:12px;text-align:center}
+    .stat-num{font-size:20px;font-weight:800;color:var(--wood)}
+    .stat-lbl{font-size:10px;color:var(--text-soft);text-transform:uppercase;letter-spacing:.05em;margin-top:2px}
+    .section-lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text-soft);margin-bottom:12px}
+    
+    .topic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:10px}
+    .t-card{background:#fff;border:1px solid var(--beige2);border-radius:var(--card-r);overflow:hidden;cursor:pointer;transition:all .18s;text-decoration:none;color:inherit;display:block;}
+    .t-card:hover{border-color:var(--warm);transform:translateY(-2px)}
+    .t-card.t-active{border:2px solid var(--drop)}
+    .t-card.t-locked{opacity:.65;cursor:default;pointer-events:none;}
+    .t-thumb{height:80px;display:flex;align-items:center;justify-content:center;font-size:34px;position:relative}
+    .t-num{position:absolute;top:7px;left:8px;width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.85);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;color:var(--text)}
+    .t-stars{position:absolute;bottom:5px;right:7px;display:flex;gap:1px}
+    .t-star{width:9px;height:9px}
+    .t-body{padding:9px 11px 11px}
+    .t-vn{font-size:13px;font-weight:700;color:var(--text);margin-bottom:1px;line-height:1.3}
+    .t-en{font-size:10px;color:var(--text-soft);font-style:italic;margin-bottom:7px;line-height:1.4}
+    .t-badge{display:inline-block;font-size:10px;font-weight:700;border-radius:20px;padding:2px 7px;margin-bottom:7px}
+    .b-done{background:#EAF3DE;color:#27500A}.b-active{background:#E6F1FB;color:#0C447C}.b-locked{background:#F1EFE8;color:#5F5E5A}
+    .t-bar-wrap{height:3px;background:var(--beige2);border-radius:3px;overflow:hidden}
+    .t-bar-fill{height:100%;border-radius:3px;transition:width .4s}
+
+    /* GIAO DIỆN ĐĂNG NHẬP */
+    .login-overlay{position:fixed;inset:0;background:var(--beige);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;transition:opacity 0.4s}
+    .login-box{background:#fff;padding:34px 24px;border-radius:20px;box-shadow:0 10px 40px rgba(139,111,78,0.15);text-align:center;max-width:340px;width:90%;border:1px solid var(--beige2)}
+    .login-input{width:100%;padding:14px;margin:8px 0;border:1.5px solid var(--beige2);border-radius:12px;font-family:'Nunito',sans-serif;font-size:14px;outline:none;transition:border 0.2s; -webkit-user-select: text; user-select: text;}
+    .login-input:focus{border-color:var(--green)}
+    .login-btn{width:100%;background:var(--green);color:#fff;border:none;padding:14px;border-radius:12px;font-weight:700;font-size:15px;cursor:pointer;margin-top:14px;font-family:'Nunito',sans-serif;transition:background 0.2s}
+    .login-btn:hover{background:var(--green-light)}
+    .error-msg{color:#E24B4A;font-size:13px;font-weight:600;display:none;margin-top:8px;animation:shake 0.3s}
+    @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+  </style>
+</head>
+<body>
+
+<!-- LỚP ĐĂNG NHẬP -->
+<div class="login-overlay" id="loginOverlay">
+  <div class="login-box">
+    <div style="font-size:48px; margin-bottom:12px">🌱</div>
+    <h2 style="font-family:'Lora', serif; color:var(--wood); margin-bottom: 24px; font-size:22px">Loving English Garden</h2>
+    
+    <input type="text" id="username" class="login-input" placeholder="Tên đăng nhập" autocomplete="off">
+    <input type="password" id="password" class="login-input" placeholder="Mật khẩu">
+    
+    <div class="error-msg" id="loginError">Tên đăng nhập hoặc mật khẩu chưa đúng!</div>
+    
+    <button class="login-btn" onclick="checkLogin()">Vào Vườn 🌿</button>
+  </div>
+</div>
+
+<!-- NỘI DUNG CHÍNH CỦA DASHBOARD -->
+<div class="nav">
+  <div class="logo">🌱 Loving English <span>Garden</span></div>
+  <div class="nav-right">
+    <div class="drops-pill">💧 <span id="navDrops">0</span></div>
+  </div>
+</div>
+
+<div class="home-wrap">
+  <div class="home-hero">
+    <div class="hero-plant" id="heroPlant">🌱</div>
+    <div class="hero-title">Vườn Tiếng Anh</div>
+    <div class="hero-sub">100 ngày · 10 chủ đề · Cả gia đình cùng học</div>
+  </div>
+  
+  <div class="stats-row">
+    <div class="stat-box"><div class="stat-num" id="sDays">0</div><div class="stat-lbl">Ngày xong</div></div>
+    <div class="stat-box"><div class="stat-num" id="sDrops">0</div><div class="stat-lbl">Giọt nước 💧</div></div>
+    <div class="stat-box"><div class="stat-num" id="sStreak">1</div><div class="stat-lbl">Chuỗi 🔥</div></div>
+    <div class="stat-box"><div class="stat-num" id="sPct" style="color:#639922">0%</div><div class="stat-lbl">Tiến độ</div></div>
+  </div>
+  
+  <div class="section-lbl">Lộ Trình 100 Ngày</div>
+  <div class="topic-grid" id="topicGrid"></div>
+</div>
+
+<script>
+// --- CHỨC NĂNG BẢO MẬT ---
+// Chống Click chuột phải
+document.addEventListener('contextmenu', event => event.preventDefault());
+
+// Chống Copy bằng phím tắt (Ctrl+C, Cmd+C)
+document.addEventListener('keydown', function(e) {
+  if ((e.ctrlKey || e.metaKey) && (e.key === 'c' || e.key === 'C')) {
+    e.preventDefault();
+  }
+});
+// Chống hành động copy
+document.addEventListener('copy', event => event.preventDefault());
+
+// --- CHỨC NĂNG ĐĂNG NHẬP ---
+function checkLogin() {
+  const u = document.getElementById('username').value.trim();
+  const p = document.getElementById('password').value.trim();
+  const err = document.getElementById('loginError');
+  
+  // Kiểm tra tài khoản và mật khẩu
+  if (u === 'weloveenglish' && p === 'beagift') {
+    sessionStorage.setItem('isLoggedIn', 'true');
+    err.style.display = 'none';
+    
+    // Hiệu ứng mờ dần khi đăng nhập thành công
+    const overlay = document.getElementById('loginOverlay');
+    overlay.style.opacity = '0';
+    setTimeout(() => { overlay.style.display = 'none'; }, 400);
+  } else {
+    err.style.display = 'block';
+  }
+}
+
+// Cho phép nhấn Enter để đăng nhập
+document.getElementById('password').addEventListener('keypress', function (e) {
+  if (e.key === 'Enter') checkLogin();
+});
+document.getElementById('username').addEventListener('keypress', function (e) {
+  if (e.key === 'Enter') document.getElementById('password').focus();
+});
+
+// Kiểm tra xem đã đăng nhập trước đó chưa (trong cùng 1 phiên lướt web)
+window.onload = function() {
+  if(sessionStorage.getItem('isLoggedIn') === 'true') {
+    document.getElementById('loginOverlay').style.display = 'none';
+  }
+}
+
+
+// --- DATA VÀ HIỂN THỊ DASHBOARD ---
+const TOPICS = [
+  {id:1,emoji:"👋",vn:"Chào nhau buổi sáng",en:"Good morning routines",color:"#EF9F27",days:"1–10",progress:0,stars:0,status:"active"},
+  {id:2,emoji:"🪥",vn:"Vệ sinh cá nhân, răng miệng",en:"Personal hygiene & teeth",color:"#5DCAA5",days:"11–20",progress:0,stars:0,status:"locked"},
+  {id:3,emoji:"👗",vn:"Quần áo, lên đồ",en:"Getting dressed",color:"#ED93B1",days:"21–30",progress:0,stars:0,status:"locked"},
+  {id:4,emoji:"🍽️",vn:"Trên bàn ăn",en:"At the dining table",color:"#85B7EB",days:"31–40",progress:0,stars:0,status:"locked"},
+  {id:5,emoji:"🧼",vn:"Rửa tay, vệ sinh",en:"Washing hands & hygiene",color:"#97C459",days:"41–50",progress:0,stars:0,status:"locked"},
+  {id:6,emoji:"🛝",vn:"Công viên, sân chơi",en:"Park & Playground",color:"#F0997B",days:"51–60",progress:0,stars:0,status:"locked"},
+  {id:7,emoji:"🧸",vn:"Dọn dẹp đồ chơi",en:"Tidying up toys",color:"#9FE1CB",days:"61–70",progress:0,stars:0,status:"locked"},
+  {id:8,emoji:"🛁",vn:"Tắm rửa",en:"Bath time",color:"#AFA9EC",days:"71–80",progress:0,stars:0,status:"locked"},
+  {id:9,emoji:"📖",vn:"Truyện trước giờ đi ngủ",en:"Bedtime stories",color:"#85B7EB",days:"81–90",progress:0,stars:0,status:"locked"},
+  {id:10,emoji:"🌙",vn:"Chúc ngủ ngon",en:"Good night",color:"#D4537E",days:"91–100",progress:0,stars:0,status:"locked"},
+];
+
+function starsHTML(n,t=5){
+  return Array.from({length:t},(_,i)=>`<svg class="t-star" viewBox="0 0 10 10"><path d="M5 1l1.2 2.5L9 4l-2 1.9.5 2.7L5 7.3 2.5 8.6 3 5.9 1 4l2.8-.5z" fill="${i<n?'#F59E0B':'#D3D1C7'}"/></svg>`).join('');
+}
+
+function renderHome(){
+  const savedDrops = localStorage.getItem('gardenDrops') || 0;
+  const savedDays = JSON.parse(localStorage.getItem('gardenDays') || '[]');
+  document.getElementById('sDays').textContent = savedDays.length;
+  document.getElementById('sDrops').textContent = savedDrops;
+  document.getElementById('navDrops').textContent = savedDrops;
+
+  const grid = document.getElementById('topicGrid');
+  grid.innerHTML = '';
+  TOPICS.forEach(t => {
+    const locked = t.status==='locked';
+    const a = document.createElement('a');
+    a.href = locked ? '#' : `topic${t.id}.html`; 
+    a.className = 't-card'+(t.status==='active'?' t-active':'')+(locked?' t-locked':'');
+    
+    const bCls = t.status==='done'?'b-done':t.status==='active'?'b-active':'b-locked';
+    const bTxt = t.status==='done'?'Hoàn thành':t.status==='active'?'Đang học':'Chưa mở';
+    const barC = t.status==='done'?'#639922':t.status==='active'?'#378ADD':'#B4B2A9';
+    
+    a.innerHTML = `
+      <div class="t-thumb" style="background:${t.color}22">
+        <span style="font-size:32px">${t.emoji}</span>
+        <div class="t-num">${t.id}</div>
+        <div class="t-stars">${starsHTML(t.stars)}</div>
+      </div>
+      <div class="t-body">
+        <div class="t-vn">${t.vn}</div>
+        <div class="t-en">${t.en}</div>
+        <span class="t-badge ${bCls}">${bTxt}</span>
+        <div style="margin-top:7px">
+          <div style="display:flex;justify-content:space-between;margin-bottom:3px">
+            <span style="font-size:10px;color:var(--text-soft)">Ngày ${t.days}</span>
+            <span style="font-size:10px;font-weight:700;color:var(--text-soft)">${t.progress}%</span>
+          </div>
+          <div class="t-bar-wrap"><div class="t-bar-fill" style="width:${t.progress}%;background:${barC}"></div></div>
+        </div>
+      </div>`;
+    grid.appendChild(a);
+  });
+}
+
+renderHome();
+</script>
+</body>
+</html>
