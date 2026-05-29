@@ -49,10 +49,13 @@
     /* MỤC 1 & 3: LIST VÀ STRUCTURE */
     .list-item{padding:14px 0;border-bottom:1px solid var(--beige2)}
     .list-item:last-child{border-bottom:none}
-    .li-en{font-family:'Lora',serif;font-size:17px;font-weight:600;color:var(--text);margin-bottom:4px}
+    .li-en{font-family:'Lora',serif;font-size:17px;font-weight:600;color:var(--text);margin-bottom:4px; display:flex; align-items:center; flex-wrap:wrap; gap:6px;}
     .li-vn{font-size:14px;color:var(--text-soft);margin-bottom:4px}
     .li-struct{background:#fff;border:1px solid var(--green-light);color:var(--green);padding:12px;border-radius:12px;font-size:13px;margin-top:8px;line-height:1.5}
     .li-struct b{color:var(--wood)}
+    .audio-btn-sm{cursor:pointer; background:var(--beige2); padding:3px 8px; border-radius:8px; font-size:11px; font-family:'Nunito',sans-serif; color:var(--text-mid); font-weight:700; transition:all 0.2s}
+    .audio-btn-sm:hover{background:var(--warm)}
+    .audio-btn-sm.slow{background:var(--drop-light); color:var(--drop)}
 
     /* MỤC 2: HỌC TỪNG NGÀY */
     .day-tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:10px;margin-bottom:20px}
@@ -63,9 +66,9 @@
     
     /* Flashcard */
     .fc-scene{perspective:900px;margin:10px 0 24px;cursor:pointer}
-    .fc-inner{width:100%;min-height:170px;position:relative;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.4,0,.2,1)}
+    .fc-inner{width:100%;min-height:180px;position:relative;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.4,0,.2,1)}
     .fc-inner.flipped{transform:rotateY(180deg)}
-    .fc-face{position:absolute;width:100%;min-height:170px;backface-visibility:hidden;border-radius:18px;padding:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+    .fc-face{position:absolute;width:100%;min-height:180px;backface-visibility:hidden;border-radius:18px;padding:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
     .fc-front{background:var(--green-pale);color:var(--text);border:2px solid var(--green-light)}
     .fc-back{background:var(--wood);color:#fff;transform:rotateY(180deg)}
     .fc-en{font-family:'Lora',serif;font-size:24px;font-weight:600;margin-bottom:8px;color:var(--wood)}
@@ -91,7 +94,7 @@
     /* MỤC 4: CHALLENGE */
     .chal-item{background:var(--beige);border:1px solid var(--warm);border-radius:14px;padding:16px;margin-bottom:12px}
     .chal-head{font-weight:700;font-size:14px;color:var(--wood);margin-bottom:10px}
-    .chal-actions{display:flex;gap:10px;align-items:center;margin-top:10px;flex-wrap:wrap}
+    .chal-actions{display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap}
     
     /* Match Game */
     .match-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px}
@@ -157,12 +160,15 @@
       <div class="fc-scene">
         <div class="fc-inner" id="theFC" onclick="document.getElementById('theFC').classList.toggle('flipped')">
           
-          <!-- MẶT 1: Tiếng Anh, IPA, Nút nghe -->
+          <!-- MẶT 1: Tiếng Anh, IPA, Nút nghe tốc độ -->
           <div class="fc-face fc-front">
             <div style="font-size:11px;opacity:.8;margin-bottom:8px;color:var(--text-mid);text-transform:uppercase;letter-spacing:1px">Tiếng Anh · Bấm thẻ để xem nghĩa</div>
             <div class="fc-en" id="dEn">—</div>
             <div class="fc-pron" id="dPron">—</div>
-            <button class="btn-sec" style="margin-top:4px;padding:6px 16px;font-size:12px;background:#fff" onclick="playAudio(document.getElementById('dEn').textContent); event.stopPropagation();">🔊 Nghe phát âm</button>
+            <div style="display:flex; gap:8px; justify-content:center; margin-top:4px;">
+              <button class="btn-sec" style="padding:6px 14px;font-size:12px;background:#fff" onclick="playAudio(document.getElementById('dEn').textContent, 1.0); event.stopPropagation();">🔊 Đọc chuẩn (1.0x)</button>
+              <button class="btn-sec" style="padding:6px 14px;font-size:12px;background:#fff;border-color:var(--drop);color:var(--drop)" onclick="playAudio(document.getElementById('dEn').textContent, 0.7); event.stopPropagation();">🐢 Đọc chậm (0.7x)</button>
+            </div>
           </div>
 
           <!-- MẶT 2: Tiếng Việt, Note -->
@@ -177,7 +183,10 @@
 
       <div class="type-box">
         <h3 style="font-size:16px;color:var(--wood);margin-bottom:12px">2. Nghe & Gõ lại câu</h3>
-        <button class="btn-sec" style="background:#fff" onclick="playAudio(document.getElementById('dEn').textContent)">🔊 Phát âm lại</button>
+        <div style="display:flex; gap:8px; justify-content:center;">
+          <button class="btn-sec" style="background:#fff; padding:8px 16px; font-size:13px" onclick="playAudio(document.getElementById('dEn').textContent, 1.0)">🔊 Nghe (1.0x)</button>
+          <button class="btn-sec" style="background:#fff; border-color:var(--drop); color:var(--drop); padding:8px 16px; font-size:13px" onclick="playAudio(document.getElementById('dEn').textContent, 0.7)">🐢 Nghe chậm (0.7x)</button>
+        </div>
         <input type="text" id="dTypeInput" class="type-input" placeholder="Gõ lại câu bạn nghe được..." style="text-align:center">
         <button class="btn-action" onclick="checkDailyType()">Kiểm tra ✓</button>
         <div id="dTypeRes" style="margin-top:12px;font-weight:bold;font-size:14px"></div>
@@ -234,7 +243,6 @@
 </div>
 
 <script>
-// DỮ LIỆU CẬP NHẬT: Thêm Ghi chú (note), Bài tập (exTask), và Đáp án (exAns)
 const CURRICULUM = [
   {day:1, en:"Good morning, sweetie!", vn:"Chào buổi sáng, con yêu!", pron:"/gʊd ˈmɔːrnɪŋ, ˈswiːti/", note:"Flap T /r/ trong 'sweetie' nghe như âm 'd' nhẹ.", struct:"Good + [thời gian trong ngày]!", structEg:"Good afternoon! (Chào buổi chiều)", exTask:"Dịch: Chào buổi tối, con yêu!", exAns:"Good evening, sweetie!"},
   {day:2, en:"Time to wake up!", vn:"Đến giờ thức dậy rồi!", pron:"/taɪm tu weɪk ʌp/", note:"Nối âm /k/ với /ʌ/ trong 'wake up'.", struct:"Time to + [Động từ nguyên mẫu]", structEg:"Time to eat! (Đến giờ ăn rồi!)", exTask:"Dịch: Đến giờ đi ngủ rồi!", exAns:"Time to sleep!"},
@@ -257,7 +265,6 @@ let preferredVoice = null;
 
 function loadVoices() {
   let voices = synth.getVoices();
-  // Ưu tiên các giọng Mỹ, Nữ, tự nhiên như Google US English, Samantha, Salli, Zira...
   preferredVoice = voices.find(v => v.lang === 'en-US' && (v.name.includes('Female') || v.name.includes('Samantha') || v.name.includes('Salli') || v.name.includes('Google US English')))
                 || voices.find(v => v.lang === 'en-US' && v.name.includes('Zira'))
                 || voices.find(v => v.lang === 'en-US')
@@ -268,16 +275,16 @@ if (speechSynthesis.onvoiceschanged !== undefined) {
   speechSynthesis.onvoiceschanged = loadVoices;
 }
 
-function playAudio(text) {
+function playAudio(text, rate = 1.0) {
   if(synth) {
     synth.cancel(); 
     let u = new SpeechSynthesisUtterance(text);
     u.lang = 'en-US';
+    u.rate = rate; // Cập nhật tốc độ nghe (1.0 hoặc 0.7)
     if(preferredVoice) u.voice = preferredVoice;
     synth.speak(u);
   }
 }
-// Chạy thử hàm tìm giọng
 setTimeout(loadVoices, 500);
 
 // --- GHI ÂM (Microphone API) ---
@@ -306,7 +313,7 @@ function stopRecording() { if (mediaRecorder && mediaRecorder.state !== "inactiv
 // --- ĐIỀU HƯỚNG ---
 function goBack() {
   if(currentView === 'Menu') {
-    window.location.href = 'index.html'; // Quay về trang Dashboard
+    window.location.href = 'index.html'; 
   } else {
     openView('Menu');
   }
@@ -334,8 +341,12 @@ function buildVocab() {
   const c = document.getElementById('vocabListContainer');
   c.innerHTML = CURRICULUM.map(d => `
     <div class="list-item">
-      <div style="font-size:12px;color:var(--green);font-weight:700">Ngày ${d.day}</div>
-      <div class="li-en">${d.en} <span style="cursor:pointer" onclick="playAudio('${d.en.replace(/'/g,"\\'")}')">🔊</span></div>
+      <div style="font-size:12px;color:var(--green);font-weight:700;margin-bottom:4px">Ngày ${d.day}</div>
+      <div class="li-en">
+        ${d.en}
+        <span class="audio-btn-sm" onclick="playAudio('${d.en.replace(/'/g,"\\'")}', 1.0)">🔊 1.0x</span>
+        <span class="audio-btn-sm slow" onclick="playAudio('${d.en.replace(/'/g,"\\'")}', 0.7)">🐢 0.7x</span>
+      </div>
       <div class="li-vn">${d.vn}</div>
       <div style="font-size:12px;color:var(--text-soft)">🗣️ ${d.pron}</div>
     </div>
@@ -352,7 +363,6 @@ function buildStructure() {
         <b>Cấu trúc:</b> ${d.struct}<br><b>Ví dụ:</b> <i>${d.structEg}</i>
       </div>
       
-      <!-- Phần bài tập ứng dụng -->
       <div style="margin-top:16px; border-top:1px dashed var(--warm); padding-top:12px">
         <div style="font-size:13px; font-weight:700; color:var(--wood); margin-bottom:6px">✍️ Bài tập ứng dụng:</div>
         <div style="font-size:14px; color:var(--text); margin-bottom:10px">${d.exTask}</div>
@@ -370,7 +380,6 @@ function checkEx(idx) {
   const d = CURRICULUM[idx];
   const inp = document.getElementById('exInp_' + idx);
   const res = document.getElementById('exRes_' + idx);
-  // Loại bỏ các dấu câu đặc biệt và chuyển về in thường để so sánh
   const clean = s => s.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"").trim().toLowerCase();
   
   if(clean(inp.value) === clean(d.exAns)) {
@@ -398,19 +407,15 @@ function loadDayContent() {
   const d = CURRICULUM[currentDay - 1];
   document.getElementById('theFC').classList.remove('flipped');
   
-  // Mặt 1
   document.getElementById('dEn').textContent = d.en;
   document.getElementById('dPron').textContent = d.pron;
-  // Mặt 2
   document.getElementById('dVn').textContent = d.vn;
   document.getElementById('dNote').textContent = `💡 Lưu ý: ${d.note}`;
   
-  // Reset Input
   document.getElementById('dTypeInput').value = '';
   document.getElementById('dTypeInput').style.borderColor = 'var(--warm)';
   document.getElementById('dTypeRes').textContent = '';
   
-  // Reset Mic
   const btn = document.getElementById('dMicBtn');
   btn.classList.remove('active');
   document.getElementById('dMicLbl').textContent = 'Bấm để bắt đầu ghi âm 🎙️';
@@ -467,8 +472,9 @@ function buildChallenge() {
       <div class="chal-head">Ngày ${d.day}: <span style="font-weight:400; color:var(--text-mid)">${d.vn}</span></div>
       
       <div class="chal-actions" style="margin-bottom:8px">
-        <button class="btn-sec" style="padding:10px 14px; font-size:13px; background:#fff" onclick="playAudio('${d.en.replace(/'/g,"\\'")}')">🔊 Nghe</button>
-        <input type="text" class="type-input" style="margin:0; flex:1; padding:10px" placeholder="Gõ câu tiếng Anh..." onkeyup="checkChalInput(this, '${d.en.replace(/'/g,"\\'")}')">
+        <button class="btn-sec" style="padding:10px; font-size:12px; background:#fff" onclick="playAudio('${d.en.replace(/'/g,"\\'")}', 1.0)">🔊 Chuẩn (1.0x)</button>
+        <button class="btn-sec" style="padding:10px; font-size:12px; background:#fff; border-color:var(--drop); color:var(--drop)" onclick="playAudio('${d.en.replace(/'/g,"\\'")}', 0.7)">🐢 Chậm (0.7x)</button>
+        <input type="text" class="type-input" style="margin:0; flex:1; min-width:140px; padding:10px" placeholder="Gõ câu tiếng Anh..." onkeyup="checkChalInput(this, '${d.en.replace(/'/g,"\\'")}')">
       </div>
       
       <div class="chal-actions">
@@ -500,7 +506,7 @@ async function toggleChalMic(idx, btnId, audId) {
       player.style.display = 'block';
     });
     if(started) {
-      document.querySelectorAll('.btn-action.active').forEach(b => b.click()); // Stop others
+      document.querySelectorAll('.btn-action.active').forEach(b => b.click());
       btn.classList.add('active');
       btn.style.background = '#E24B4A';
       btn.textContent = '⏹ Dừng';
@@ -513,14 +519,12 @@ async function toggleChalMic(idx, btnId, audId) {
   }
 }
 
-// MATCH GAME
 function initMatchGame() {
   const ec = document.getElementById('mgEnCol');
   const vc = document.getElementById('mgVnCol');
   const res = document.getElementById('matchRes');
   ec.innerHTML = ''; vc.innerHTML = ''; res.textContent = '';
   
-  // Lấy ngẫu nhiên 5 câu từ CURRICULUM
   const pairs = [...CURRICULUM].sort(() => Math.random() - 0.5).slice(0, 5);
   const shufEn = [...pairs].sort(() => Math.random() - 0.5);
   const shufVn = [...pairs].sort(() => Math.random() - 0.5);
@@ -554,10 +558,8 @@ function initMatchGame() {
   }
 }
 
-// HOÀN THÀNH TOPIC
 function finishTopic() {
   alert("🎉 Chúc mừng bạn đã hoàn thành xuất sắc Topic 1!\nCây tiếng Anh của gia đình đang lớn lên từng ngày 🌱\n\nBấm OK để chuyển sang Topic 2.");
-  // Link này sẽ chuyển sang trang Topic 2 mà bạn sẽ tạo
   window.location.href = 'topic2.html'; 
 }
 
