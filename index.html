@@ -8,7 +8,7 @@
   <style>
     :root{
       --beige:#F5F0E8;--beige2:#EDE6D6;--warm:#D4C5A9;--wood:#8B6F4E;--green:#5C8A5E;
-      --drop:#4A90D9;--drop-light:#A8D4F5;--text:#3D2B1F;--text-soft:#9B7E6F;--card-r:16px;
+      --drop:#4A90D9;--drop-light:#A8D4F5;--text:#3D2B1F;--text-soft:#9B7E6F;--card-r:20px;
     }
     *{margin:0;padding:0;box-sizing:border-box}
     
@@ -20,60 +20,59 @@
       user-select: none; /* Standard syntax */
     }
 
-    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:rgba(245,240,232,0.97);border-bottom:1px solid var(--warm);position:sticky;top:0;z-index:99}
-    .logo{font-family:'Lora',serif;font-size:20px;color:var(--wood);font-weight:600;cursor:pointer} /* Tăng từ 17px -> 20px */
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;background:rgba(245,240,232,0.97);border-bottom:1px solid var(--warm);position:sticky;top:0;z-index:99}
+    .logo{font-family:'Lora',serif;font-size:24px;color:var(--wood);font-weight:600;cursor:pointer} /* Tăng logo */
     .logo span{color:var(--green)}
-    .nav-right{display:flex;align-items:center;gap:10px}
-    .drops-pill{display:flex;align-items:center;gap:6px;background:var(--drop-light);border:1px solid var(--drop);border-radius:20px;padding:4px 12px;font-size:14px;font-weight:700;color:var(--drop)} /* Tăng từ 12px -> 14px */
+    .nav-right{display:flex;align-items:center;gap:12px}
+    .drops-pill{display:flex;align-items:center;gap:6px;background:var(--drop-light);border:1px solid var(--drop);border-radius:24px;padding:6px 16px;font-size:16px;font-weight:700;color:var(--drop)} 
     
-    .home-wrap{padding:24px 18px 60px;max-width:780px;margin:0 auto}
-    .home-hero{text-align:center;padding:24px 0 24px}
-    .hero-plant{font-size:64px;margin-bottom:12px} /* Tăng từ 52px -> 64px */
-    .hero-title{font-family:'Lora',serif;font-size:28px;color:var(--wood);font-weight:600;margin-bottom:8px} /* Tăng từ 24px -> 28px */
-    .hero-sub{font-size:16px;color:var(--text-soft)} /* Tăng từ 13px -> 16px */
+    .home-wrap{padding:30px 24px 80px;max-width:1000px;margin:0 auto} /* Mở rộng khung từ 780px lên 1000px */
+    .home-hero{text-align:center;padding:30px 0 32px}
+    .hero-plant{font-size:80px;margin-bottom:16px} /* Icon nảy mầm to hơn */
+    .hero-title{font-family:'Lora',serif;font-size:36px;color:var(--wood);font-weight:600;margin-bottom:12px} 
+    .hero-sub{font-size:18px;color:var(--text-soft)} 
     
-    /* Mặc định hiển thị 2 cột cho điện thoại */
-    .stats-row{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:24px}
-    .stat-box{background:#fff;border:1px solid var(--beige2);border-radius:var(--card-r);padding:16px 12px;text-align:center}
-    .stat-num{font-size:24px;font-weight:800;color:var(--wood)} /* Tăng từ 20px -> 24px */
-    .stat-lbl{font-size:12px;color:var(--text-soft);text-transform:uppercase;letter-spacing:.05em;margin-top:4px} /* Tăng từ 10px -> 12px */
-    .section-lbl{font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text-soft);margin-bottom:14px} /* Tăng từ 11px -> 14px */
+    .stats-row{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:36px}
+    .stat-box{background:#fff;border:1px solid var(--beige2);border-radius:var(--card-r);padding:24px 16px;text-align:center}
+    .stat-num{font-size:36px;font-weight:800;color:var(--wood)} /* Số thống kê cực to */
+    .stat-lbl{font-size:14px;color:var(--text-soft);text-transform:uppercase;letter-spacing:.05em;margin-top:6px;font-weight:700}
+    .section-lbl{font-size:16px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--text-soft);margin-bottom:20px} 
     
-    /* Mặc định min 155px cho thẻ để điện thoại nhỏ vẫn hiện 2 cột đẹp nhưng rộng rãi hơn */
-    .topic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:12px}
+    /* Mặc định điện thoại cột rộng hơn */
+    .topic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px}
     .t-card{background:#fff;border:1px solid var(--beige2);border-radius:var(--card-r);overflow:hidden;cursor:pointer;transition:all .18s;text-decoration:none;color:inherit;display:block;}
-    .t-card:hover{border-color:var(--warm);transform:translateY(-2px)}
+    .t-card:hover{border-color:var(--warm);transform:translateY(-3px);box-shadow:0 8px 24px rgba(139,111,78,0.1)}
     .t-card.t-active{border:2px solid var(--drop)}
     .t-card.t-locked{opacity:.65;cursor:default;pointer-events:none;}
-    .t-thumb{height:90px;display:flex;align-items:center;justify-content:center;font-size:40px;position:relative} /* Chữ emoji to lên một chút */
-    .t-num{position:absolute;top:8px;left:8px;width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.85);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;color:var(--text)} /* Nới rộng hình tròn, tăng chữ */
-    .t-stars{position:absolute;bottom:6px;right:8px;display:flex;gap:2px}
-    .t-star{width:11px;height:11px}
-    .t-body{padding:12px 14px 14px}
-    .t-vn{font-size:15px;font-weight:700;color:var(--text);margin-bottom:4px;line-height:1.3} /* Tăng từ 13px -> 15px */
-    .t-en{font-size:12px;color:var(--text-soft);font-style:italic;margin-bottom:10px;line-height:1.4} /* Tăng từ 10px -> 12px */
-    .t-badge{display:inline-block;font-size:11px;font-weight:700;border-radius:20px;padding:3px 8px;margin-bottom:10px} /* Tăng nhẹ cỡ chữ huy hiệu */
+    .t-thumb{height:120px;display:flex;align-items:center;justify-content:center;position:relative} /* Khung ảnh/icon cao hơn */
+    .t-num{position:absolute;top:10px;left:10px;width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.9);font-size:14px;font-weight:800;display:flex;align-items:center;justify-content:center;color:var(--text)} 
+    .t-stars{position:absolute;bottom:8px;right:10px;display:flex;gap:3px}
+    .t-star{width:14px;height:14px} /* Sao to hơn */
+    .t-body{padding:16px}
+    .t-vn{font-size:18px;font-weight:800;color:var(--text);margin-bottom:6px;line-height:1.4} /* Tiêu đề thẻ to rõ */
+    .t-en{font-size:14px;color:var(--text-soft);font-style:italic;margin-bottom:12px;line-height:1.4}
+    .t-badge{display:inline-block;font-size:12px;font-weight:700;border-radius:20px;padding:4px 10px;margin-bottom:12px} 
     .b-done{background:#EAF3DE;color:#27500A}.b-active{background:#E6F1FB;color:#0C447C}.b-locked{background:#F1EFE8;color:#5F5E5A}
-    .t-bar-wrap{height:4px;background:var(--beige2);border-radius:4px;overflow:hidden}
-    .t-bar-fill{height:100%;border-radius:4px;transition:width .4s}
+    .t-bar-wrap{height:6px;background:var(--beige2);border-radius:6px;overflow:hidden} /* Thanh tiến trình dày hơn */
+    .t-bar-fill{height:100%;border-radius:6px;transition:width .4s}
 
     /* GIAO DIỆN ĐĂNG NHẬP */
     .login-overlay{position:fixed;inset:0;background:var(--beige);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;transition:opacity 0.4s}
-    .login-box{background:#fff;padding:36px 28px;border-radius:20px;box-shadow:0 10px 40px rgba(139,111,78,0.15);text-align:center;max-width:360px;width:90%;border:1px solid var(--beige2)}
-    .login-input{width:100%;padding:14px;margin:8px 0;border:1.5px solid var(--beige2);border-radius:12px;font-family:'Nunito',sans-serif;font-size:16px;outline:none;transition:border 0.2s; -webkit-user-select: text; user-select: text;}
+    .login-box{background:#fff;padding:48px 36px;border-radius:24px;box-shadow:0 12px 48px rgba(139,111,78,0.15);text-align:center;max-width:420px;width:90%;border:1px solid var(--beige2)} /* Form bự hơn */
+    .login-input{width:100%;padding:16px;margin:10px 0;border:1.5px solid var(--beige2);border-radius:12px;font-family:'Nunito',sans-serif;font-size:18px;outline:none;transition:border 0.2s; -webkit-user-select: text; user-select: text;}
     .login-input:focus{border-color:var(--green)}
-    .login-btn{width:100%;background:var(--green);color:#fff;border:none;padding:14px;border-radius:12px;font-weight:700;font-size:16px;cursor:pointer;margin-top:16px;font-family:'Nunito',sans-serif;transition:background 0.2s}
-    .login-btn:hover{background:var(--green)}
-    .error-msg{color:#E24B4A;font-size:14px;font-weight:600;display:none;margin-top:8px;animation:shake 0.3s}
+    .login-btn{width:100%;background:var(--green);color:#fff;border:none;padding:16px;border-radius:12px;font-weight:800;font-size:18px;cursor:pointer;margin-top:20px;font-family:'Nunito',sans-serif;transition:background 0.2s}
+    .login-btn:hover{background:var(--green);opacity:0.9}
+    .error-msg{color:#E24B4A;font-size:15px;font-weight:600;display:none;margin-top:10px;animation:shake 0.3s}
     @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
 
-    /* RESPONSIVE LỚN HƠN CHO MÀN HÌNH MÁY TÍNH/TABLET */
-    @media (min-width: 576px) {
+    /* RESPONSIVE MÁY TÍNH/TABLET MỚI */
+    @media (min-width: 650px) {
       .stats-row {
         grid-template-columns: repeat(4, 1fr);
       }
       .topic-grid {
-        grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); /* Thẻ bài học to hơn hẳn trên máy tính */
       }
     }
   </style>
@@ -82,8 +81,8 @@
 
 <div class="login-overlay" id="loginOverlay">
   <div class="login-box">
-    <div style="font-size:52px; margin-bottom:12px">🌱</div>
-    <h2 style="font-family:'Lora', serif; color:var(--wood); margin-bottom: 24px; font-size:24px">Loving English Garden</h2>
+    <div style="font-size:64px; margin-bottom:16px">🌱</div>
+    <h2 style="font-family:'Lora', serif; color:var(--wood); margin-bottom: 32px; font-size:28px">Loving English Garden</h2>
     
     <input type="text" id="username" class="login-input" placeholder="Tên đăng nhập" autocomplete="off">
     <input type="password" id="password" class="login-input" placeholder="Mật khẩu">
@@ -200,7 +199,7 @@ function renderHome(){
     
     a.innerHTML = `
       <div class="t-thumb" style="background:${t.color}22">
-        <span style="font-size:38px">${t.emoji}</span>
+        <span style="font-size:56px">${t.emoji}</span>
         <div class="t-num">${t.id}</div>
         <div class="t-stars">${starsHTML(t.stars)}</div>
       </div>
@@ -208,10 +207,10 @@ function renderHome(){
         <div class="t-vn">${t.vn}</div>
         <div class="t-en">${t.en}</div>
         <span class="t-badge ${bCls}">${bTxt}</span>
-        <div style="margin-top:7px">
-          <div style="display:flex;justify-content:space-between;margin-bottom:4px">
-            <span style="font-size:12px;color:var(--text-soft)">Ngày ${t.days}</span>
-            <span style="font-size:12px;font-weight:700;color:var(--text-soft)">${t.progress}%</span>
+        <div style="margin-top:10px">
+          <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+            <span style="font-size:13px;color:var(--text-soft)">Ngày ${t.days}</span>
+            <span style="font-size:13px;font-weight:800;color:var(--text-soft)">${t.progress}%</span>
           </div>
           <div class="t-bar-wrap"><div class="t-bar-fill" style="width:${t.progress}%;background:${barC}"></div></div>
         </div>
